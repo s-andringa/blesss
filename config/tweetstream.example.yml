@@ -1,0 +1,5 @@
+development:
+  consumer_key: 'xxx'
+  consumer_secret: 'xxx'
+  oauth_token: 'xxx-xxx'
+  oauth_token_secret: 'xxx'

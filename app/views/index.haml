@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %title #Blesss - Make your blessing count
+    %link{ rel: "stylesheet", href: "/assets/app.css", type: "text/css" }
+    %script{ src: "/assets/app.js", type: "text/javascript" }
+  %body
+    %header
+      %h1 #Blesss - Make your blessing count
+      %p
+        Blesss shows you the web's most blessed people.
+    #main.cf
+      .col#top-blessed
+        %h2 Top 5 Ever
+        %ul
+          - @top_blessed.each do |person|
+            %li
+              %span.cnt= person.cnt
+              = person.username
+      .col#last-blessed
+        %h2 Recently blessed
+        %ul
+          - @last_blessed.each do |person|
+            %li
+              = person.username
+              %span.latest-at= person.latest_at.strftime("%d/%m, %H:%M")
+    %footer
+      Creators
+      %a{ href: "http://twitter.com/SjAndringa" } Sjoerd
+      &amp;
+      %a{ href: "http://twitter.com/whocameupwith" } Jan-Martijn
+      &copy; 2012

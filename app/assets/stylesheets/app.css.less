@@ -1,0 +1,80 @@
+//= require clearfix
+
+@base_color: #D1C000;
+@heading_color: darken(@base_color, 20%);
+@link_color: #1DD1DE;
+
+html {
+  background-color: darken(@base_color, 10%);
+  color: white;
+  font-family: Georgia, Serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3, h4 {
+  color: @heading_color;
+  margin: 0 0 5px 0;
+}
+
+h1 {
+  color: darken(@heading_color, 5%);
+  font-size: 2.5em;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+}
+
+h2 {
+  font-size: 1.4em;
+}
+
+a {
+  color: @link_color;
+}
+
+header, footer, #main {
+  padding: 25px;
+}
+
+header {
+  background-color: lighten(@base_color, 10%);
+  color: @heading_color;
+  p {
+    margin: 0;
+  }
+}
+
+#main {
+  background-color: @base_color;
+  .col {
+    float: left;
+    &#top-blessed {
+      width: 260px;
+    }
+    &#last-blessed {
+      width: 360px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      li {
+        height: 35px;
+        span {
+          &.cnt {
+            font-size: 1.6em;
+            line-height: 16px; // to make sure baseline remains in line with other text.
+            color: lighten(@base_color, 20%);
+            display: inline-block;
+            width: 50px;
+          }
+          &.latest-at {
+            font-size: 0.8em;
+            color: darken(@base_color, 10%);
+          }
+        }
+      }
+    }
+  }
+}
