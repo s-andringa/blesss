@@ -5,7 +5,7 @@
  * updates list.
  */
 $(function(){
-  var ws = new WebSocket("ws://0.0.0.0:4567/blessings");
+  var ws = new WebSocket("ws://" + window.location.host + "/blessings");
   ws.onmessage = function (evt) {
     var blessing = $.parseJSON(evt.data);
     var li = $("<li>").text(blessing.username + " ").append($("<span>", {"class": "latest-at"}).text(blessing.time));
