@@ -9,13 +9,18 @@ end
 
 get "/blessings" do
   if request.websocket?
-    request.websocket! on_start: ->(ws){
-      sub = EM::Hiredis.connect
-      sub.subscribe "blessings"
-      sub.on(:message) do |channel, message|
-        ws.send_message({ username: message, time: Time.now.strftime("%d/%m, %H:%M") }.to_json)
-      end
-    }
+    sub = EM::Hiredis.connect
+    request.websocket!(
+      on_start: ->(ws){
+        sub.subscribe "blessings"
+        sub.on(:message) do |channel, message|
+          ws.send_message({ username: message, time: Time.now.strftime("%d/%m, %H:%M") }.to_json)
+        end
+      },
+      on_close: ->(ws){
+        sub.close_connection
+      }
+    )
   else
     [406, "Websocket connection required."]
   end
