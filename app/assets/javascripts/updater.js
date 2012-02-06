@@ -5,14 +5,22 @@
  * updates list.
  */
 $(function(){
-  var ws = new WebSocket("ws://" + window.location.host + "/blessings");
-  ws.onmessage = function (evt) {
-    var blessing = $.parseJSON(evt.data);
-    var li = $("<li>").text(blessing.username + " ").append($("<span>", {"class": "latest-at"}).text(blessing.time));
+  var blessingsChannel = new WebSocket("ws://" + window.location.host + "/ws/blessings");
+  blessingsChannel.onmessage = function (evt) {
+    var person = $.parseJSON(evt.data);
+    var li = $("<li><a href='http://twitter.com/"+ person.username +"'>" + person.username + "</a> <span class='latest-at'>"+ person.latest_at +"</span></li>")
     $("#last-blessed ul").prepend(li);
-    $("#last-blessed ul li:last").remove();
+    $("#last-blessed ul li:gt(4)").remove();
   };
-  ws.onclose = function (evt) {
-    console.log("WS connection closed")
-  }
+
+  var top5Channel = new WebSocket("ws://" + window.location.host + "/ws/top_5");
+  top5Channel.onmessage = function (evt) {
+    var top5 = $.parseJSON(evt.data);
+    var list = $("<ul>")
+    $.each(top5, function(){
+      var li = $("<li><span class='cnt'>" + this.cnt + "</span> <a href='http://twitter.com/"+ this.username +"'>" + this.username + "</a></li>")
+      list.append(li)
+    });
+    $("#top-blessed ul").replaceWith(list);
+  };
 });

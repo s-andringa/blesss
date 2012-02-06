@@ -7,14 +7,15 @@ get "/" do
   haml :index
 end
 
-get "/blessings" do
+
+get "/ws/:channel" do |channel|
   if request.websocket?
     sub = EM::Hiredis.connect
     request.websocket!(
       on_start: ->(ws){
-        sub.subscribe "blessings"
-        sub.on(:message) do |channel, message|
-          ws.send_message({ username: message, time: Time.now.strftime("%d/%m, %H:%M") }.to_json)
+        sub.subscribe(channel)
+        sub.on(:message) do |c, message|
+          ws.send_message(message)
         end
       },
       on_close: ->(ws){
