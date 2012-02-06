@@ -16,14 +16,14 @@
           - @top_blessed.each do |person|
             %li
               %span.cnt= person.cnt
-              = person.username
+              %a{ href: "http://twitter.com/#{person.username}" }= person.username
       .col#last-blessed
         %h2 Recently blessed
         %ul
           - @last_blessed.each do |person|
             %li
-              = person.username
-              %span.latest-at= person.latest_at.strftime("%d/%m, %H:%M")
+              %a{ href: "http://twitter.com/#{person.username}" }= person.username
+              %span.latest-at= person.latest_at
     %footer
       Creators
       %a{ href: "http://twitter.com/SjAndringa" } Sjoerd
