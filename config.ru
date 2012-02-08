@@ -24,7 +24,7 @@ require "./assets"
 
 map '/assets' do
   Blesss.set :assets, Blesss::Assets.new(debug: Blesss.debug?)
-  run Blesss.settings.assets
+  run Blesss.assets
 end
 
 run Blesss
