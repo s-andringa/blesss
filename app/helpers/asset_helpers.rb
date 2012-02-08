@@ -10,7 +10,7 @@ module AssetHelpers
 
 private
 
-  def asset_include_tag(sources, template, body = false)
+  def asset_include_tag(sources, template)
     prefix = "/assets"
     sources.map do |source|
       asset = settings.assets.find_asset(source)
