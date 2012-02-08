@@ -16,15 +16,10 @@ also_reload "./app/models/person"
 
 require "./app/models/person"
 require "./blesss"
+require "./assets"
 
 map '/assets' do
-  environment = Sprockets::Environment.new
-  %w(stylesheets javascripts).each do |dirname|
-    environment.append_path File.join(Sinatra::Application.root, "app/assets/#{dirname}")
-  end
-  environment.css_compressor = YUI::CssCompressor.new
-  environment.js_compressor = YUI::JavaScriptCompressor.new(munge: true)
-  run environment
+  run Blesss::Assets
 end
 
 run Sinatra::Application

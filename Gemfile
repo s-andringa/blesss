@@ -13,3 +13,4 @@ gem "em-hiredis"
 gem "json"
 gem "tweetstream", require: false
 gem "activesupport"
+gem "rake", require: false

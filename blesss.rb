@@ -1,6 +1,17 @@
 set :haml, :format => :html5
 set :views, settings.root + "/app/views"
 
+
+template :javascript_include_tag do
+  "%script{ src: url, type: \"text/javascript\" }"
+end
+
+helpers do
+  def javascript_include_tag(*paths)
+    paths.map { |path| haml(:javascript_include_tag, locals: {url: path}) }.join("\n")
+  end
+end
+
 get "/" do
   @top_blessed = Person.top_blessed(5)
   @last_blessed = Person.last_blessed(5)
