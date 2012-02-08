@@ -11,15 +11,20 @@ module ActiveSupport
   Base64 = ::Base64
 end
 
-require "sinatra/reloader" if development?
-also_reload "./app/models/person"
+if development?
+  require "sinatra/reloader"
+  also_reload "./app/models/person"
+  also_reload "./app/helpers/asset_helper"
+end
 
 require "./app/models/person"
+require "./app/helpers/asset_helpers"
 require "./blesss"
 require "./assets"
 
 map '/assets' do
-  run Blesss::Assets
+  Blesss.set :assets, Blesss::Assets.new(debug: Blesss.debug?)
+  run Blesss.settings.assets
 end
 
-run Sinatra::Application
+run Blesss
