@@ -17,7 +17,7 @@ body {
 
 h1, h2, h3, h4 {
   color: @heading_color;
-  margin: 0 0 5px 0;
+  margin: 0 0 15px 0;
 }
 
 h1 {
@@ -55,10 +55,18 @@ header {
     }
     &#last-blessed {
       width: 360px;
+      #mask {
+        height: 5 * 35px;
+        overflow: hidden;
+        ul {
+          position: relative;
+        }
+      }
     }
     ul {
       list-style: none;
       padding: 0;
+      margin: 0;
       li {
         height: 35px;
         a {

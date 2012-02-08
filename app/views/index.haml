@@ -3,7 +3,7 @@
   %head
     %title #Blesss - Make your blessing count
     %link{ rel: "stylesheet", href: "/assets/app.css", type: "text/css" }
-    %script{ src: "/assets/app.js", type: "text/javascript" }
+    = javascript_include_tag("/assets/app.js")
   %body
     %header
       %h1 #Blesss - Make your blessing count
@@ -19,11 +19,12 @@
               %a{ href: "http://twitter.com/#{person.username}" }= person.username
       .col#last-blessed
         %h2 Recently blessed
-        %ul
-          - @last_blessed.each do |person|
-            %li
-              %a{ href: "http://twitter.com/#{person.username}" }= person.username
-              %span.latest-at= person.latest_at
+        #mask
+          %ul
+            - @last_blessed.each do |person|
+              %li
+                %a{ href: "http://twitter.com/#{person.username}" }= person.username
+                %span.latest-at= person.latest_at
     %footer
       Creators
       %a{ href: "http://twitter.com/SjAndringa" } Sjoerd
